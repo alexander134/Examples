@@ -7,7 +7,7 @@ const fucntionEvento =(num)=>{
 
     return (
         <>
-            <h1>hola mundosssssss</h1>
+            <h1>hola alexander diaz</h1>
             <button onClick={fucntionEvento}>llamar</button>
             <button onClick={ () =>fucntionEvento('alx')}>llamar2</button>
         </>
