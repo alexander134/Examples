@@ -1,7 +1,8 @@
- import React from 'react'
+ import React, { Component } from 'react'
 import Contador from './components/Contador'
 import Lista from './components/Lista'
 import Parrafo from './components/Parrafo'
+import Componente from './components/Componente'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Parrafo/>
       <Contador/>
       <Lista/>
+      <Componente/>
     </div>
   );
 }
