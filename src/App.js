@@ -1,4 +1,4 @@
- import React, { Component } from 'react'
+import React, { Component } from 'react'
 import Contador from './components/Contador'
 import Lista from './components/Lista'
 import Parrafo from './components/Parrafo'
