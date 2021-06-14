@@ -30,6 +30,7 @@ const Componente = () => {
     const llamalista=()=>{
         console.log(lista)
     }
+    
     return (
         <>
             <h1>prueba PC EVE</h1>
