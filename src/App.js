@@ -10,13 +10,16 @@ function App() {
   const [listaTarea,setListaTarea]=useState([])
   const [modoEditar,setModoEditar]=useState(false)
   const [idTareaS,setIdTareaS]=useState('')
+  const [errorT,setError]=useState(null)
 
   const guardarTarea=(e)=>{
     e.preventDefault()
     if(!tarea.trim()){
-      console.log("Elemento Vacio")
+      // console.log("Elemento Vacio")
+      setError("Elemento vacio")
       return
     }
+    setError(null)
     // console.log(tarea)
     // e.target.reset() OR setTarea('')
     setListaTarea([
@@ -44,9 +47,11 @@ function App() {
   const editarTarea = e =>{
     e.preventDefault()
     if(!tarea.trim()){
-      console.log("Elemento Vacio")
+      // console.log("Elemento Vacio")
+      setError("Elemento vacio")
       return
     }
+    setError(null)
 
     let arrayEditado = listaTarea.map(item => item.idTarea === idTareaS ? {idTarea:idTareaS,nombreTarea:tarea}:item)
     setListaTarea(arrayEditado)
@@ -64,13 +69,19 @@ function App() {
           <h4 className="text-center">Lista de tareas</h4>
           <ul className="list-group">
             {
-              listaTarea.map((item,index)=>(
-                <li className="list-group-item" key={item.idTarea} >
-                  <span className="lead">{item.nombreTarea}</span>
-                  <button onClick={()=>eliminar(item.idTarea)} className="btn btn-danger btn-sm float-right">Eliminar</button>
-                  <button onClick={()=>editar(item)} className="btn btn-warning btn-sm float-right mx-2">Editar</button>
-                </li>
-              ))
+              listaTarea.length===0 ?(
+                <li className="list-group-item">No hay tareas</li>
+              )
+              :
+              (
+                listaTarea.map((item,index)=>(
+                  <li className="list-group-item" key={item.idTarea} >
+                    <span className="lead">{item.nombreTarea}</span>
+                    <button onClick={()=>eliminar(item.idTarea)} className="btn btn-danger btn-sm float-right">Eliminar</button>
+                    <button onClick={()=>editar(item)} className="btn btn-warning btn-sm float-right mx-2">Editar</button>
+                  </li>
+                ))
+              )
             }
           </ul>
         </div>
@@ -79,6 +90,10 @@ function App() {
             {modoEditar ? 'Editar Tarea' : 'Agregar Tarea'}
           </h4>
           <form onSubmit={ modoEditar ? editarTarea : guardarTarea } >
+            {
+              errorT && <span className="text-danger">{errorT}</span>
+            }
+
             <input type="text" className="form-control mb-2" value={tarea} onChange={e=> setTarea(e.target.value)} placeholder="Ingrese Nombre Tarea"/>
             {modoEditar ? (
               <button className="btn btn-warning btn-block" type="submit" >Editar Tarea</button>
