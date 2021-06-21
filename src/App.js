@@ -1,20 +1,29 @@
-import React,{ useState} from 'react'
-import shortid from 'shortid'
+import React from 'react'
+// import shortid from 'shortid'
 // import Contador from './components/Contador'
 // import Lista from './components/Lista'
 // import Parrafo from './components/Parrafo'
 // import Componente from './components/Componente'
-import Components from './CRUD/Compenents'
-import Props from './props/Props'
-
+// import Components from './CRUD/Compenents'
+// import Props from './props/Props'
+import Routess from './routes/Routes'
 
 function App() {
   return (
     <div>
-      <Props/>
+      <Routess/>
     </div>
   )    
 }
+
+
+// function Props() {
+//   return (
+//     <div>
+//       <Props/>
+//     </div>
+//   )    
+// }
 
 
 // function Crud() {
