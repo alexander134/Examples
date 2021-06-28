@@ -11,10 +11,18 @@ import Routess from './routes/Routes'
 function App() {
   return (
     <div>
-      <Routess/>
+      nuevo proyecto
     </div>
   )    
 }
+// hasta el video 55
+// function App() {
+//   return (
+//     <div>
+//       <Routess/>
+//     </div>
+//   )    
+// }
 
 
 // function Props() {
