@@ -4,6 +4,7 @@ import Inicio from './components/Inicio'
 import Comentarios from './components/Comentario'
 import Contactos from './components/Contactos'
 import Acerca from './components/Acerca'
+import Civilizacion from './components/Civilizacion'
 const Routes = () => {
     return (
         <Router>
@@ -26,6 +27,9 @@ const Routes = () => {
             <Switch>
                 <Route path="/" exact>
                     <Inicio/>
+                </Route>
+                <Route path="/contactos/:id">
+                    <Civilizacion/>
                 </Route>
                 <Route path="/contactos">
                     <Contactos/>
