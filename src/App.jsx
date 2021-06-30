@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import HomeWorksWeeks from './FhomeWorkWeeks/HomeWorksWeeks'
+import React from 'react'
+// import HomeWorksWeeks from './FhomeWorkWeeks/HomeWorksWeeks'
+import HomeWorksWeeks from './FhomeWorkWeeks/HomeWorksWeeks2'
 
 function App() {
   return (
