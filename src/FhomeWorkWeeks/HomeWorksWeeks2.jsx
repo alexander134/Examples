@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Listado from './Components/Listado'
 import Formulario from './Components/Formulario'
-// import { firebase } from './Components/Listado'
 
 function HomeWorksWeeks2() {
-    const [recarga, setRecarga] = useState(0)
-
-    useEffect(() => {
-        // console.log("prueba");
-        const obtnerTareas = async () => {
-            try {
-                console.log("contenedor")
-            } catch (error) {
-                console.log("error al ir al firestore");
-            }
-        }
-
-        obtnerTareas()
-    }, [])
+    const [tareas, setTareas] = useState([])
+    const [modoEdicion, serModoEdicion] = useState(false)
+    const [idTarea, setIdTarea] = useState("")
+    const [tarea, setTarea] = useState("")
+    const [descripcionTarea, setDescripcionTarea] = useState("")
     return (
         <div className="container mt-3">
             <div className="row">
-                <Listado recarga={recarga} setRecarga={setRecarga} />
-                <Formulario recarga={recarga} setRecarga={setRecarga} />
+                <Listado tareas={tareas}
+                    setTareas={setTareas}
+                    serModoEdicion={serModoEdicion}
+                    setIdTarea={setIdTarea}
+                    setTarea={setTarea}
+                    setDescripcionTarea={setDescripcionTarea} />
+                <Formulario tareas={tareas}
+                    setTareas={setTareas}
+                    modoEdicion={modoEdicion}
+                    serModoEdicion={serModoEdicion}
+                    setIdTarea={setIdTarea}
+                    idTarea={idTarea}
+                    tarea={tarea}
+                    setTarea={setTarea}
+                    descripcionTarea={descripcionTarea}
+                    setDescripcionTarea={setDescripcionTarea} />
             </div>
         </div>
     )

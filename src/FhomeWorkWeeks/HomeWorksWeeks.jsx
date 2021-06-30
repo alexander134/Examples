@@ -11,20 +11,16 @@ function HomeWorksWeeks() {
     const [modoEdicion, serModoEdicion] = useState(false)
 
     useEffect(() => {
-        // console.log("prueba");
         const obtnerTareas = async () => {
             try {
                 const db = firebase.firestore()
                 const data = await db.collection('homeWork').get()
-                // console.log(data.docs);
                 const arrayData = await data.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-                // console.log(arrayData);
                 setTareas(arrayData)
             } catch (error) {
                 console.log("error al ir al firestore");
             }
         }
-
         obtnerTareas()
     }, [])
 

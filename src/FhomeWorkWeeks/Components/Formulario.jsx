@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { firebase } from '../firebase'
 
 function Formulario(props) {
-    const { recarga, setRecarga } = props;
-    const [tarea, setTarea] = useState("")
-    const [descripcionTarea, setDescripcionTarea] = useState("")
-    const [modoEdicion, serModoEdicion] = useState(false)
+    const { tareas, setTareas, modoEdicion, serModoEdicion, setIdTarea, idTarea, tarea, setTarea, descripcionTarea, setDescripcionTarea } = props;
+
     const [validaInputAgregar, setFalidaInputAgregar] = useState(false)
     const [validaInputAgregarDes, setFalidaInputAgregarDes] = useState(false)
 
@@ -30,11 +28,10 @@ function Formulario(props) {
                 descripcion: descripcionTarea
             }
             const data = await db.collection('homeWork').add(nuevaTarea)
-            // setTareas([
-            //     ...tareas,
-            //     { ...nuevaTarea, id: data.id }
-            // ])
-            setRecarga(1)
+            setTareas([
+                ...tareas,
+                { ...nuevaTarea, id: data.id }
+            ])
             setTarea('')
             setDescripcionTarea('')
         } catch (error) {
@@ -45,36 +42,34 @@ function Formulario(props) {
 
     const editarTarea = async (e) => {
         e.preventDefault()
-        // if (!tarea.trim()) {
-        //     setFalidaInputAgregar(true)
-        //     return
-        // }
-        // setFalidaInputAgregar(false)
-        // if (!descripcionTarea.trim()) {
-        //     setFalidaInputAgregarDes(true)
-        //     return
-        // }
-        // setFalidaInputAgregarDes(false)
-        // try {
-        //     const db = firebase.firestore()
-        //     await db.collection('homeWork').doc(idTarea).update({
-        //         name: tarea,
-        //         descripcion: descripcionTarea
-        //     })
-        //     // const arraEditado = tareas.map(item => (
-        //     //     item.id === idTarea ? { id: item.id, fecha: item.fecha, descripcion: descripcionTarea, name: tarea } : item
-        //     // ))
-        //     // setTareas(arraEditado)
-        //     serModoEdicion(false)
-        //     setTarea('')
-        //     setDescripcionTarea('')
-        //     setIdTarea('')
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        if (!tarea.trim()) {
+            setFalidaInputAgregar(true)
+            return
+        }
+        setFalidaInputAgregar(false)
+        if (!descripcionTarea.trim()) {
+            setFalidaInputAgregarDes(true)
+            return
+        }
+        setFalidaInputAgregarDes(false)
+        try {
+            const db = firebase.firestore()
+            await db.collection('homeWork').doc(idTarea).update({
+                name: tarea,
+                descripcion: descripcionTarea
+            })
+            const arraEditado = tareas.map(item => (
+                item.id === idTarea ? { id: item.id, fecha: item.fecha, descripcion: descripcionTarea, name: tarea } : item
+            ))
+            setTareas(arraEditado)
+            serModoEdicion(false)
+            setTarea('')
+            setDescripcionTarea('')
+            setIdTarea('')
+        } catch (error) {
+            console.log(error);
+        }
     }
-
-
 
     return (
         <div className="col-md-6">

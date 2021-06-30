@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { firebase } from '../firebase'
 
 function Listado(props) {
-    const { recarga, setRecarga } = props;
-    const [tareas, setTareas] = useState([])
+    const { tareas, setTareas, serModoEdicion, setIdTarea, setTarea, setDescripcionTarea } = props;
 
     useEffect(() => {
         const obtnerTareas = async () => {
@@ -17,14 +16,10 @@ function Listado(props) {
             }
         }
         obtnerTareas();
-        if (recarga === 1) {
-            setRecarga(0)
-        }
-    }, [recarga])
+    }, [setTareas])
 
 
     const eliminarTarea = async (id) => {
-        // console.log("eliminarTarea")
         try {
             const db = firebase.firestore()
             await db.collection('homeWork').doc(id).delete()
@@ -33,18 +28,20 @@ function Listado(props) {
         } catch (error) {
             console.log(error);
         }
+        serModoEdicion(false)
+        setTarea('')
+        setDescripcionTarea('')
+        setIdTarea('')
     }
 
     const activarEditarTarea = (item) => {
-        console.log("activarEditarTarea")
-        // serModoEdicion(true)
-        // setIdTarea(item.id)
-        // setTarea(item.name)
-        // setDescripcionTarea(item.descripcion)
+        serModoEdicion(true)
+        setIdTarea(item.id)
+        setTarea(item.name)
+        setDescripcionTarea(item.descripcion)
     }
     return (
         <div className="col-md-6">
-            {/* <h1>({recarga})</h1> */}
             <ul className="list-group">
                 {
                     tareas.map(item => (
